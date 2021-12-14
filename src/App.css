@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  /* background-color: rgb(123, 121, 121); */
+  /* background-image: url(D:\react\learning\src\hack3.jpg); */
+  background-repeat: no-repeat;
+  height: 100%;
+  /* background-color: greenyellow; */
 }
 
 .App-logo {
@@ -9,7 +14,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 21s linear;
   }
 }
 
@@ -36,3 +41,167 @@
     transform: rotate(360deg);
   }
 }
+.show{
+  display: block;
+  transition: 800ms;
+  opacity: 1;
+  border: 2px;
+}
+.show.active{
+  transform: translateX(100px) scale(0) rotateY(180deg);
+  opacity: 0;
+}
+#pop{
+  border-radius: 20px;
+  align-items: center;
+  height: 800px;
+
+}
+#loginform{
+  width: 30%;
+  border: 5px solid black;
+  text-align: center;
+  margin-left: 33%;
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+  font-weight: bold;
+
+}
+
+.demo {
+  position: relative;
+  padding-top: 10px;
+  height: 800px;
+}
+.demo:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-image: url('D:\react\learning\src\hack3.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+}
+
+.container {
+  position: relative;
+  /* background-color: yellow; */
+  border-radius: 25px 25px 25px 25px;
+  margin-top: 10px;
+
+}
+
+/* .demo-content:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-image: url('D:\react\learning\src\hack.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+} */
+
+
+/* .btn{
+  color: white;
+  cursor: pointer;
+  outline: none; 
+  margin: 12px 0;
+  padding: 10px 21px;
+  border: 2px solid purple;
+  border-radius: 10px;
+  font-size: 18px;
+  background: none;
+  font-weight: bold;
+  
+}
+
+.container h1{
+  font-family: 'Heebo', sans-serif;
+  width: 20%;
+  display: inline-block;
+  font-size: 40px;
+  border-bottom: 5px solid purple;
+  margin-bottom: 15px;
+  padding: 13px 0;
+}
+*/
+.box input{  
+
+  background-blend-mode: darken;
+  width: 40%;
+  padding: 5px 10px;
+  font-size: 20px;
+  border: none;
+  outline:none;
+  color:black;
+  margin-left: 30px;
+  margin: 15px;
+  padding:10px;
+  border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+} 
+.container{
+  padding: 20px;
+  height: 500px;
+  background-color: white;
+  margin-top: 50px;
+}
+.form{
+  padding:20px;
+  width: 50%;
+  float: left;
+  height: 100%;
+  background-color:solid black;
+
+}
+
+#image{
+
+background-image: url('D:/react/learning/src/hack.jpg');
+}
+.header{
+  padding-bottom: 40px;
+}
+
+.glow {
+  font-size: 40px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  animation: glow 0.2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+
+.middle {
+
+  padding: 50px;
+
+}
+.footer{
+  padding: 20px;
+  
+
+}
+
+
+
