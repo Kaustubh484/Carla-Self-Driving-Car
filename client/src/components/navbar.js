@@ -1,7 +1,8 @@
 import React from 'react';
-import LOGO from 'D:/react/learning/src/hack_logo.jpg'
-
+import LOGO from '../hack_logo.jpg'
+import {Link, useNavigate} from "react-router-dom"
 function NavBar({handleLoginClick}){
+  const navigate= useNavigate();
     const handleClick = ()=>{
         handleLoginClick()
     }
@@ -27,7 +28,12 @@ return(
         </li>
       </ul>
       <li className="d-flex">
-      <button type="button" class="btn btn-primary" onClick={handleClick}>Login/Sign up</button>
+      <button  class="btn btn-primary" onClick={()=>{
+       
+
+       handleClick();
+       navigate('/login');
+        }}>Login/Sign up</button>
       </li>
       {/* <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
