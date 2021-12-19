@@ -85,12 +85,7 @@ function HandleSubmit(e){
                                     value={email}
                                     onChange={(e)=>{setEmail(e.target.value)}}/>
                                 </div>
-                                <div class="box">
-
-                                    <input type="text" name="name" id="email" placeholder="Enter Your Full Name"  
-                                    value={email}
-                                    onChange={(e)=>{setEmail(e.target.value)}}/>
-                                </div>
+                               
                                 <div class="box">
 
                                     <input type="text" name="username" id="username" placeholder="Enter Your Username"  
