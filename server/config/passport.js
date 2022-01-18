@@ -5,6 +5,7 @@ const validPassword= require(`../lib/passportUtils`).validPassword;
 
 
 const verifycallback=(username,password,done)=>{
+    
     User.findOne({username:username})
     .then((user)=>{
         if(!user) return done(null,false);

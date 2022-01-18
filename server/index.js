@@ -1,12 +1,21 @@
 require(`dotenv`).config();
+// module exports
 const express =require(`express`);
 const mongoose = require(`mongoose`);
 const bodyParser= require('body-parser');
+const path= require(`path`);
 const cors =require(`cors`);
-// const passport=require(`passport`);
+//GridFs modules
+const multer = require(`multer`);
+const {GridFsStorage} = require('multer-gridfs-storage');
+const Grid= require(`gridfs-stream`);
+//Auth modules
 const crypto= require('crypto');
 const authRoutes= require(`./routes/authRoutes`);
 const session= require(`express-session`);
+
+//Image upoading route
+const imgRoutes= require(`./routes/imageRoutes`);
 
  const app= express();
  app.use(express.urlencoded({extended:true}));
@@ -30,18 +39,45 @@ app.use(session({
  const passport=require(`./config/passport`);
 app.use(passport.initialize());
 app.use(passport.session());
- mongoose.connect('mongodb://localhost:27017/HackSquad', { useNewUrlParser: true });
- db = mongoose.connection;
- db.once('open', () => {
+//  mongoose.connect('mongodb://localhost:27017/HackSquad', { useNewUrlParser: true });
+ const mongooseURI=`mongodb://localhost:27017/HackSquad`;
+ mongoose.connect(mongooseURI, { useNewUrlParser: true });
+conn = mongoose.connection;
+ 
+ conn.once('open', () => {
+    var gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection(`uploads`);
      console.log("Connected to Mongo");
  })
- db.on('error', () => {
+ conn.on('error', () => {
      console.log("Error in connection to Mongo");
  })
+
+ //initialise GridFs storage
+ const storage= new GridFsStorage({
+     url:mongooseURI,
+     file: (req, file) => {
+        return new Promise((resolve, reject) => {
+          crypto.randomBytes(16, (err, buf) => {
+            if (err) {
+              return reject(err);
+            }
+            const filename = buf.toString('hex') + path.extname(file.originalname);
+            const fileInfo = {
+              filename: filename,
+              bucketName: 'uploads'
+            };
+            resolve(fileInfo);
+          });
+        });
+      }
+ })
+
+ const upload= multer({storage});
  
-//  app.use((req,res,next)=>{
-//      console.log(req.session);
-//  })
+ 
+//include image uploading logic
+app.use(imgRoutes(upload));
  
   
 
