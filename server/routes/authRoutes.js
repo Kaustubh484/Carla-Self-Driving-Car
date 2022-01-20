@@ -3,9 +3,7 @@ const router= express.Router();
 const passport = require(`passport`);
 const generatePassword= require(`../lib/passportUtils`).generatePassword;
 const User = require(`../models/user`);
-// passport.use(User.createStrategy());
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+
 
 
 router.get('/users/:id', async(req, res,next) => {

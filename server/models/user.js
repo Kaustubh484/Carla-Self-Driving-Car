@@ -15,6 +15,7 @@ email:{
     type:String,
     required:true
 },
+Name:String,
 GitHubLink:String,
 LinkedinLink:String,
 Description:String

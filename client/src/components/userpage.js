@@ -36,7 +36,25 @@ const UserPage = () => {
         },[]);
         // handle submit of entire form
         const handleSubmit= async(e)=>{
-         
+         e.preventDefault();
+         try{
+          await axios.post(
+            `http://localhost:5000/user/update`,
+            {
+                User:User
+            }
+           ).then((res)=>{
+               if(res.data.User){
+                  console.log(res.data.User);//Remove
+                   setUser(res.data.User);
+               
+               }
+           })
+          
+
+        }catch(err){
+          console.log(err);
+        }
         }
         // handle uploading of pic to backend
         const picUpdate= async(e)=>{
@@ -107,9 +125,11 @@ const UserPage = () => {
     
     {User && (
         <div>
-            Welcome {User.username}
-            {image ? <img src={`http://localhost:5000/upload/${image.filename}`} alt="no pic found"/>:<div><h4>No Image Found</h4></div>} 
+            Welcome {User.username?User.username:<p>Wtf</p>}
+            {/* Profile Pic */}
+           {image ? <img src={`http://localhost:5000/upload/${image.filename}`} alt="no pic found"/>:<div><h4>No Image Found</h4></div>} 
             <button onClick={()=>{deleteimage();}}>Delete current profile pic</button>
+            {/* Form for image uploading only */}
             <form  onSubmit={picUpdate}>
                 <label>Profile Picture</label>
                 <input type="file" name="profilepic" id="pic" 
@@ -117,19 +137,49 @@ const UserPage = () => {
                 console.log(e.target.files[0].name)}} />
                 <input type="submit" value="Upload" />
                 </form>
+             {/* Form to update user details */}
             <form onSubmit={handleSubmit} id="details">
-              
-                
-                <label> Full Name</label>
-                <input type="text" />
+            {/* We are handling all properties of user in a single object State 'User'
+            and updating it */}
+              <label> Full Name</label>
+                <input type="text" value={User.Name}
+                onChange={(e)=>{setUser(prevState=>{
+                    // Fetch previous state and update its property
+                    let user={...prevState};
+                    user.Name= e.target.value
+                    return user;
+                })}}/>
                 <label>email </label>
-                <input type="text" />
+                <input type="text" value={User.email}
+                onChange={(e)=>{setUser(prevState=>{
+                    let user={...prevState};
+                    user.email= e.target.value
+                    return user;
+                })}}/>
                 <label>Github Link </label>
-                <input type="url" name="githubLink" id="" />
+                <input type="url" name="githubLink" id=""
+                value={User.GitHubLink}
+                onChange={(e)=>{setUser(prevState=>{
+                    let user={...prevState};
+                    user.GitHubLink= e.target.value
+                    return user;
+                })}} />
                 <label>Linkedin Link </label>
-                <input type="url" name="linkedinLink" id="" />
+                <input type="url" name="linkedinLink" id="" 
+                value={User.LinkedinLink}
+                onChange={(e)=>{setUser(prevState=>{
+                    let user={...prevState};
+                    user.LinkedinLink= e.target.value
+                    return user;
+                })}}/>
                 <label>Write a description about yourself</label>
-                <textarea name="Description" id="des" cols="30" rows="5"></textarea>
+                <textarea name="Description" id="des" cols="30" rows="5"
+                value={User.Description}
+                onChange={(e)=>{setUser(prevState=>{
+                    let user={...prevState};
+                    user.Description= e.target.value
+                    return user;
+                })}}></textarea>
                 <button type="submit">Update Details</button>
             </form>
             </div>

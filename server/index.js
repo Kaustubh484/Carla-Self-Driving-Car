@@ -17,6 +17,9 @@ const session= require(`express-session`);
 //Image upoading route
 const imgRoutes= require(`./routes/imageRoutes`);
 
+//User Routes
+const userRoutes=require(`./routes/useRoutes`);
+
  const app= express();
  app.use(express.urlencoded({extended:true}));
  app.use(bodyParser.json());
@@ -40,18 +43,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 //  mongoose.connect('mongodb://localhost:27017/HackSquad', { useNewUrlParser: true });
- const mongooseURI=`mongodb://localhost:27017/HackSquad`;
+ const mongooseURI=`mongodb://127.0.0.1:27017/HackSquad`;
  mongoose.connect(mongooseURI, { useNewUrlParser: true });
-conn = mongoose.connection;
+db = mongoose.connection;
+db.once('open', () => {
+    console.log("Connected to Mongo");
+})
+db.on('error', (err) => {
+    console.log("Error in connection to Mongo");
+})
+
+
  
- conn.once('open', () => {
-    var gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection(`uploads`);
-     console.log("Connected to Mongo");
- })
- conn.on('error', () => {
-     console.log("Error in connection to Mongo");
- })
 
  //initialise GridFs storage
  const storage= new GridFsStorage({
@@ -79,7 +82,8 @@ conn = mongoose.connection;
 //include image uploading logic
 app.use(imgRoutes(upload));
  
-  
+  //User routes
+  app.use(userRoutes);
 
  app.use(authRoutes);
 //  app.get('/home',(req,res)=>{

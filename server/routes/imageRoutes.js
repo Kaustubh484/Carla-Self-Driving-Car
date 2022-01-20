@@ -7,16 +7,19 @@ const Image= require(`../models/image`);
 
 // exported as a function to accept multer storage variable 'upload' as an arguement
 module.exports=(upload)=>{
-    const mongooseURI=`mongodb://localhost:27017/HackSquad`;
+    const mongooseURI=`mongodb://127.0.0.1:27017/HackSquad`;
     mongoose.connect(mongooseURI, { useNewUrlParser: true });
-   conn = mongoose.connection;
+   db = mongoose.connection;
     let gfs;
-    conn.once('open', () => {
+    db.once('open', () => {
         //initialising GridFsBucket stream (used for steaming image from database)
-        gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+        gfs = new mongoose.mongo.GridFSBucket(db, {
             bucketName: "uploads"
         });
         console.log("Connected to Mongo");
+    })
+    db.on('error', (err) => {
+        console.log("Error in connection to Mongo");
     })
 
     //Upload route
