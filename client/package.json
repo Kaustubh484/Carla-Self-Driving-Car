@@ -13,6 +13,9 @@
     "react-modal-login": "^1.4.5",
     "react-router-dom": "^6.1.1",
     "react-scripts": "4.0.3",
+    "react-select": "^5.2.2",
+    "react-tinder-card": "^1.5.0",
+    "rsuite": "^5.5.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -39,5 +42,4 @@
       "last 1 safari version"
     ]
   }
-  
 }

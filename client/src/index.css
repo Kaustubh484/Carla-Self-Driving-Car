@@ -11,3 +11,128 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* .dashboard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard .swipe-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+} */
+
+/* .dashboard .swipe {
+  position: absolute;
+}
+
+.dashboard .card-container {
+  width: 400px;
+  height: 650px;
+}
+
+.dashboard .card {
+  width: 600px;
+  height: 650px;
+  border-radius: 30px;
+  background-size: cover;
+  /* background-position: center; */
+/* }
+
+.dashboard .card h3 {
+  margin-top:0;
+}
+
+ */ 
+.swipe-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 400px;
+ 
+}
+.swipe {
+  position: absolute;
+ 
+}
+
+.cardContainer {
+  width: 90vw;
+  max-width: 260px;
+  height: 300px;
+ 
+}
+
+.card {
+  
+  background-color: #fff;
+  width: 80vw;
+  max-width: 260px;
+   height: 300px;
+  box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+ 
+}
+
+
+
+
+
+
+
+.card h3 {
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
+  color:white; 
+}
+.swipe-info{
+  font-size: xx-large;
+  color: black;
+}
+.dashboard{
+  display: flex;
+  justify-content: space-between;
+}
+.ChatContainer{
+  border: 2px solid green;
+  width: 30%;
+  height: 90vh;
+}
+.ChatContainer .ChatHeader{
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid red;
+}
+.ChatContainer .option button{
+  border: none;
+  font-size: larger;
+  background-color: rgb(152, 125, 180);
+  border-radius: 10px;
+  margin: 5px;
+  color: #fff;
+}
+
+.ChatContainer .option button:disabled{
+  
+  background-color: rebeccapurple;
+  
+}
+
+.Chat{
+  height: 50vh;
+  overflow-y: auto;
+}
+.ChatInput{
+  display: flex;
+  flex-direction: column;
+}

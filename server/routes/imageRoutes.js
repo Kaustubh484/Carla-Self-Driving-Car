@@ -7,20 +7,18 @@ const Image= require(`../models/image`);
 
 // exported as a function to accept multer storage variable 'upload' as an arguement
 module.exports=(upload)=>{
-    const mongooseURI=`mongodb://127.0.0.1:27017/HackSquad`;
-    mongoose.connect(mongooseURI, { useNewUrlParser: true });
-   db = mongoose.connection;
-    let gfs;
-    db.once('open', () => {
-        //initialising GridFsBucket stream (used for steaming image from database)
-        gfs = new mongoose.mongo.GridFSBucket(db, {
-            bucketName: "uploads"
-        });
-        console.log("Connected to Mongo");
-    })
-    db.on('error', (err) => {
-        console.log("Error in connection to Mongo");
-    })
+
+const connect = mongoose.createConnection(`mongodb://localhost:27017/HackSquad`, { useNewUrlParser: true, useUnifiedTopology: true });
+
+let gfs;
+
+connect.once('open', () => {
+    // initialize stream
+    gfs = new mongoose.mongo.GridFSBucket(connect.db, {
+        bucketName: "uploads"
+    });
+});
+
 
     //Upload route
     imageRouter.post('/upload/image/:userid',upload.single('pic'),(req,res)=>{
@@ -89,15 +87,33 @@ imageRouter.delete(`/upload/image/:userid/delete`,(req,res)=>{
     const uid=mongoose.mongo.ObjectId(req.params.userid);
     Image.find({userid:uid}).then((images)=>{
         const recent= images[images.length-1];
+        console.log(recent);
         Image.deleteOne({fileid:recent.fileid}).then((image)=>{
             
-            gfs.delete(recent.fileid,(err,data)=>{
-                if(err){
-                    console.log(err);
-                 return   res.status(500).json({msg:"error deleting file"});
+            // gfs.delete(recent.fileid,(err,data)=>{
+            //     if(err){
+            //         console.log(err);
+            //      return   res.status(500).json({msg:"error deleting file"});
+            //     }
+            //   return  res.status(200).json({msg:"file deleted"});
+            // })
+            try{
+                const obj_id = new mongoose.Types.ObjectId(recent.fileid);
+    
+            gfs.delete(obj_id, (err, data) => {
+                if (err) {
+                    return res.status(404).json({ err: err });
                 }
-              return  res.status(200).json({msg:"file deleted"});
-            })
+
+                res.status(200).json({
+                    success: true,
+                    message: `File with ID ${recent.fileid} is deleted`,
+                });}
+                
+            );
+            }catch(err){
+                console.log(err);
+            }
 
 
         })

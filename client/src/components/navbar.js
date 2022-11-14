@@ -1,7 +1,7 @@
 import React from 'react';
 import LOGO from '../hack_logo.jpg'
 import {Link, useNavigate} from "react-router-dom"
-function NavBar({handleLoginClick}){
+function NavBar({handleLoginClick,isShowLogin}){
   const navigate= useNavigate();
     const handleClick = ()=>{
         handleLoginClick()
@@ -28,12 +28,10 @@ return(
         </li>
       </ul>
       <li className="d-flex">
-      <button  class="btn btn-primary" onClick={()=>{
-       
-
+    { isShowLogin && <button  class="btn btn-primary" onClick={()=>{
        handleClick();
        navigate('/login');
-        }}>Login/Sign up</button>
+        }}>Login/Sign up</button>}
       </li>
       {/* <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
