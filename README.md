@@ -3,7 +3,7 @@ Phase 1:Object Detection
 
 First part of our project involved detecting real world objects in carla simulated environment. For this, we took help of a well known detection model called YOLO4(You Only Look once) because of its great tradeoff between Speed and Accuracy.
 
-    YOLO4 weights file can be downloaded from this Link and placed in the models folder
+YOLO4 weights file can be downloaded from this Link and placed in the models folder
 
    
 
